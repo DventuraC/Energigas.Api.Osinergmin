@@ -1,0 +1,6 @@
+@Energigas.Api.Osinergmin_HostAddress = http://localhost:5078
+
+GET {{Energigas.Api.Osinergmin_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
