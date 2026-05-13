@@ -65,7 +65,7 @@ namespace Infrastructure.Integrations.Osinergmin
                 var contentParse = SoapResponseParser.SimplePurchaseOrderParser(content);
 
                 if (contentParse.resultado == "0" || contentParse.codigoError != "")
-                    throw new BusinessException($"Error codigo: {contentParse.codigoError}");
+                    throw new OsinergminException($"Error codigo: {contentParse.codigoError}", contentParse.codigoError);
 
                 var result = new SimplePurchaseOrderResponseDto
                 {
