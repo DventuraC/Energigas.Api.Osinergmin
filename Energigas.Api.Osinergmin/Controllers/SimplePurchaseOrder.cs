@@ -20,7 +20,6 @@ namespace Energigas.Api.Osinergmin.Controllers
         }
 
         [HttpPost("create")]
-        [Authorize]
         public async Task<IActionResult> GenerateSimplePurchaseOrder([FromBody] SimplePurchaseOrderRequestDto request)
         {
             var result = await _IpurchaseOrderService.CreateSimplePurchaseOrder(request);
