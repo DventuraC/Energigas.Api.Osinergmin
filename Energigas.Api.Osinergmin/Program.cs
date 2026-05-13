@@ -5,14 +5,15 @@ using Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi;
 using Shared.Common;
 using System.Security.Cryptography;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Swager
 builder.Services.AddEndpointsApiExplorer();
+/*
 builder.Services.AddSwaggerGen(e =>
 {
     e.SwaggerDoc("v1", new OpenApiInfo
@@ -20,13 +21,23 @@ builder.Services.AddSwaggerGen(e =>
         Title = "Energigas Api Osinergmin",
         Version = "v1"
     });
-});
 
+    e.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Ingrese: Bearer {token}",
+    });
+});
+*/
 builder.Services.AddControllers();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 
-
+/*
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -51,6 +62,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddAuthorization();
+*/
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
@@ -89,7 +101,7 @@ app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 
