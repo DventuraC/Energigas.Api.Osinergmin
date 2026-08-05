@@ -13,7 +13,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Swager
 builder.Services.AddEndpointsApiExplorer();
-/*
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+builder.Services.AddRouting(opt =>
+{
+    opt.LowercaseUrls = true;
+    opt.LowercaseQueryStrings = true;
+});
+
 builder.Services.AddSwaggerGen(e =>
 {
     e.SwaggerDoc("v1", new OpenApiInfo
@@ -21,7 +37,7 @@ builder.Services.AddSwaggerGen(e =>
         Title = "Energigas Api Osinergmin",
         Version = "v1"
     });
-
+    /*
     e.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -30,12 +46,12 @@ builder.Services.AddSwaggerGen(e =>
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
         Description = "Ingrese: Bearer {token}",
-    });
+    });*/
 });
-*/
+
 builder.Services.AddControllers();
 builder.Services.AddApplication();
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 /*
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
@@ -85,12 +101,14 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 var app = builder.Build();
 
-if(app.Environment.IsDevelopment())
+if(app.Environment.IsDevelopment() || builder.Configuration.GetValue<bool>("EnableSwaggerInProd"))
 {
+    app.UseMiddleware<SwaggerBasicAuthMiddleware>();
     app.UseSwagger();
     app.UseSwaggerUI(e =>
     {
         e.SwaggerEndpoint("/swagger/v1/swagger.json", "Energigas Api Osinergmin v1");
+        e.RoutePrefix = "swagger";
     });
 }
 

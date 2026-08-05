@@ -1,5 +1,6 @@
-﻿using Application.Interfaces;
-using Energigas.Api.Osinergmin.Application.DTOs;
+﻿using Application.DTOs.Requests;
+using Application.DTOs.Responses;
+using Application.Interfaces;
 
 namespace Energigas.Api.Osinergmin.Application.Services
 {
@@ -18,6 +19,20 @@ namespace Energigas.Api.Osinergmin.Application.Services
 
             return response;
         }
+
+        public async Task<SimpleOrderResponseDto> GetSimpleOrder(SimpleOrderRequestDto simpleOrder)
+        {
+            var response = await _IsoapOsinermingClient.GetSimplePurchaseByScopAsync(simpleOrder);
+
+            return response;
+        }
+
+        public async Task<AttentionOrderResponseDto> AttentionOrder(AttentionOrderRequestDto order)
+        {
+            var respone = await _IsoapOsinermingClient.AttentionOrderAsync(order);
+            return respone;
+        }
+
     }
 
 }

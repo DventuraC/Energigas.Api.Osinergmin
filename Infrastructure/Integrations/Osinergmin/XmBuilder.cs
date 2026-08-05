@@ -1,7 +1,4 @@
-﻿using Energigas.Api.Osinergmin.Application.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Infrastructure.Integrations.Osinergmin.DTOs.Requests;
 using System.Xml.Linq;
 
 namespace Infrastructure.Integrations.Osinergmin
@@ -32,5 +29,43 @@ namespace Infrastructure.Integrations.Osinergmin
 
             return xml;
         }
+
+        public static XElement GetSimpleOrderByScopXml(SoapGetOrderByScopRequestDto request)
+        {
+            var xml = new XElement("parametro",
+                new XElement("loginUsuario", request.loginUsuario ),
+                new XElement("claveUsuario", request.claveUsuario),
+                new XElement("codigoAutorizacion", request.codigoAutorizacion)
+            );
+            return xml;
+        }
+
+        public static XElement AttentionOrderXml(SoapAttentionOrderRequestDto request)
+        {
+            var details = request.detalles.Select(x =>
+                new XElement("detalles",
+                    new XElement("detallePedido", x.detallePedido),
+                    new XElement("codigoProducto", x.codigoProducto),
+                    new XElement("cantidadVendida", x.cantidadVendida),
+                    new XElement("placaTransporte", x.placaTransporte),
+                    new XElement("codigoEstado", x.codigoEstado)
+            ));
+
+            var xml = new XElement("ordenPedido",
+                new XElement("loginUsuario", request.loginUsuario),
+                new XElement("claveUsuario", request.claveUsuario),
+                new XElement("codigoAutorizacion", request.codigoAutorizacion),
+                new XElement("codigoMayoristaEquivalente", request.codigoMayoristaEquivalente),
+                new XElement("codigoPlantaEquivalente", request.codigoPlantaEquivalente),
+                new XElement("numeroFactura", request.numeroFactura),
+                new XElement("fechaFactura", request.fechaFactura),
+                new XElement("tipoVentaFactor", request.tipoVentaFactor),
+                new XElement("codigoEquivalenteProductor", request.codigoEquivalenteProductor),
+                details
+                );
+
+            return xml;
+        }
+
     }
 }

@@ -63,12 +63,14 @@ namespace Shared.Common
             { "56", "Datos del mayorista/planta vacios o nulos"},
             { "57", "No puede realizar ningun tipo de transacción, se excedió de los días de plazo para cerrar sus ordenes de pedido pendientes"},
             { "58", "No se puede comprar dos o mas productos equivalentes en una misma orden"},
-            { "59", "No puede realizar ningun tipo de transacción.\r\nHa acumulado Ordenes de Pedido sin Cerrar y/o pendientes del registro de sus ventas en el SPIC que superan lo permitido\r\n"}
-
-
-
-
-
+            { "59", "No puede realizar ningun tipo de transacción.\r\nHa acumulado Ordenes de Pedido sin Cerrar y/o pendientes del registro de sus ventas en el SPIC que superan lo permitido\r\n"},
+            { "60", "La unidad operativa asociada al usuario no cuenta con el Registro de Hidrocarburos Vigente."},
+            { "61", "La orden ya se encuentra CERRADA Estado detalle orden pedido no despachada"},
+            { "62", "No ha transcurrido el tiempo necesario para registrar el cierre"},
+            { "63", "La orden de pedido no puede ser cerrada hasta que el medio de transporte haya llegado exitosamente al establecimiento del agente comprador según la señal GPS y el combustible sea descargado en su totalidad en el establecimiento del agente comprador"},
+            { "64", "El código Osinergmin del establecimiento destino no es válido o no está asociado al agente que genera la orden pedido"},
+            { "65", "El establecimiento destino tiene pendiente el registro de sus inventarios diarios de combustibles lóquidos/GLP"},
+            { "66", "Tiene pendiente el registro de sus precios de combustibles líquidos/GLP" }
         };
 
         public static string GetMessage(string code)
