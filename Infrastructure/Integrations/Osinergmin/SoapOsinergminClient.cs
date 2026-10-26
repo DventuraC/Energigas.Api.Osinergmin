@@ -192,7 +192,9 @@ namespace Infrastructure.Integrations.Osinergmin
                     CodigoEstado = e.CodigoEstado,
                     CodigoProducto = e.CodigoProducto,
                     DetallePedido = e.DetallePedido,
-                    PlacaTransporte = e.PlacaTransporte
+                    PlacaTransporte = e.PlacaTransporte,
+                    FactorAPI = e.FactorAPI,
+                    Temperatura = e.Temperatura
                 }).ToList()
             };
 
