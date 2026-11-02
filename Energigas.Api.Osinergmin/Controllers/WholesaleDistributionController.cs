@@ -7,11 +7,11 @@ namespace Energigas.Api.Osinergmin.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class WholesaleDistribution : ControllerBase
+    public class WholesaleDistributionController : ControllerBase
     {
         private readonly IPurchaseOrderService _IpurchaseOrderService;
 
-        public WholesaleDistribution(IPurchaseOrderService IpurchaseOrderService)
+        public WholesaleDistributionController(IPurchaseOrderService IpurchaseOrderService)
         {
             _IpurchaseOrderService = IpurchaseOrderService;
         }
