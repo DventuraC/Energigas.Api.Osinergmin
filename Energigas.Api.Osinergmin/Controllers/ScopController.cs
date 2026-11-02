@@ -8,11 +8,11 @@ namespace Energigas.Api.Osinergmin.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class Scop : ControllerBase
+    public class ScopController : ControllerBase
     {
         private readonly IPurchaseOrderService _IpurchaseOrderService;
 
-        public Scop(IPurchaseOrderService IpurchaseOrderService)
+        public ScopController(IPurchaseOrderService IpurchaseOrderService)
         {
             _IpurchaseOrderService = IpurchaseOrderService;
         }
